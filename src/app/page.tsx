@@ -1,12 +1,7 @@
-import { Layout } from "~/components/layouts/layout";
 import { Graph } from "~/components/sections/graph";
 
 const Home = () => {
-  return (
-    <Layout>
-      <Graph />
-    </Layout>
-  );
+  return <Graph />;
 };
 
 export default Home;
