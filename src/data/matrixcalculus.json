@@ -1,0 +1,40 @@
+[
+  {
+    "group": "nodes",
+    "data": {
+      "id": "matrixcalculus",
+      "label": "Matrix Calculus",
+      "nodeType": "topic",
+      "tier": "free",
+      "link": "https://json-schema.org/overview/what-is-jsonschema"
+    }
+  },
+  {
+    "group": "nodes",
+    "data": {
+      "id": "matrixcalculus1",
+      "label": "Intro to Matrix Calculus",
+      "parent": "matrixcalculus",
+      "nodeType": "video",
+      "tier": "free",
+      "type": "overview",
+      "author": ["AInokoji"],
+      "link": "https://www.youtube.com/watch?v=DLkNQgh4Ons",
+      "tags": ["Intro, Chain Rule"]
+    }
+  },
+  {
+    "group": "nodes",
+    "data": {
+      "id": "matrixcalculus2",
+      "label": "Multivariate Functions",
+      "parent": "matrixcalculus",
+      "nodeType": "video",
+      "tier": "free",
+      "type": "definition",
+      "author": ["kokomi"],
+      "link": "https://www.youtube.com/watch?v=DLkNQgh4Ons",
+      "tags": ["hi"]
+    }
+  }
+]
