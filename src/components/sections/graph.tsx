@@ -1,5 +1,5 @@
 import { Cytoscape } from "~/components/sections/cytoscape";
-import { getData } from "~/data/get-data";
+import { getData } from "~/lib/get-data";
 
 export const Graph = () => {
   const elements = getData();

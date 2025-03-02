@@ -6,7 +6,7 @@ import { z } from "zod";
 
 export const getData = (): ElementDefinition[] => {
   let elements: ElementDefinition[] = [];
-  const dataPath = path.join(process.cwd(), "src", "data");
+  const dataPath = path.join(process.cwd(), "data");
   const jsonFiles = fs.readdirSync(dataPath);
   jsonFiles.forEach((file) => {
     if (path.extname(file) === ".json") {
