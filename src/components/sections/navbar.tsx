@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const Navbar = () => (
-  <header className="sticky top-0 z-50 border-b border-gray-400 bg-gray-100 bg-opacity-50 py-0.5 backdrop-blur-md backdrop-saturate-200 dark:border-gray-700 dark:bg-gray-900">
+  <header className="sticky top-0 z-50 border-b border-gray-400/50 bg-gray-100/50 py-0.5 backdrop-blur-md backdrop-saturate-200 dark:border-gray-700/50 dark:bg-gray-900/50">
     <nav className="container flex h-16 items-center justify-between lg:h-20">
       <figure className="relative h-full">
         <Link href="/">

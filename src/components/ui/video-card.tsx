@@ -1,4 +1,4 @@
-import { type VideoNodeDataDefinition } from "~/types/cytoscape";
+import { type VideoNodeDataDefinition } from "~/types/cytoscape-elements";
 import { useState } from "react";
 
 export const VideoCard = ({

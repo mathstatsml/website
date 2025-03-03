@@ -128,9 +128,15 @@ importers:
       cytoscape-navigator:
         specifier: ^2.0.2
         version: 2.0.2(cytoscape@3.31.0)
+      cytoscape-node-edge-html-label:
+        specifier: ^1.0.6
+        version: 1.0.6(@types/cytoscape@3.21.9)(cytoscape@3.31.0)
       cytoscape-popper:
         specifier: ^4.0.1
         version: 4.0.1(cytoscape@3.31.0)
+      cytoscape-view-utilities:
+        specifier: ^6.0.0
+        version: 6.0.0(cytoscape@3.31.0)
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
@@ -2062,8 +2068,22 @@ packages:
     peerDependencies:
       cytoscape: ^2.6.0 || ^3.0.0
 
+  cytoscape-node-edge-html-label@1.0.6:
+    resolution: {integrity: sha512-akoXdFrqarV7Kp1cUUh1PhiTx76+Vh9Qob29+Hzgw0YLq1MrZIu/CE5MkAUGLHRP2L/hDEZoAzT+K5WM6kDmgQ==}
+    peerDependencies:
+      '@types/cytoscape': ^3.1.0
+      cytoscape: ^3.0.0
+    peerDependenciesMeta:
+      '@types/cytoscape':
+        optional: true
+
   cytoscape-popper@4.0.1:
     resolution: {integrity: sha512-u2gYDMMvGSlAJbNfKvMljOM/p+BrHu0A4VcpELa+xJf54HoMn+nV0iuhALZx+O89b74SKJRy7jYo2WfkD5uvsw==}
+    peerDependencies:
+      cytoscape: ^3.2.0
+
+  cytoscape-view-utilities@6.0.0:
+    resolution: {integrity: sha512-R4rErfwkW/68Bz5CmM6RbKYvaj3gASl0rnuQl7H1ahv4TNJz9fD9vOX21485HYpe4Sw+7cVjwD+03KJLFjZVPg==}
     peerDependencies:
       cytoscape: ^3.2.0
 
@@ -2567,6 +2587,9 @@ packages:
 
   functions-have-names@1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
+
+  geometric@2.5.5:
+    resolution: {integrity: sha512-/JsW/m2himHf+C6h0oeNhbG7emWLJJp7tYDpvPawXwxSCtNw0W0MF+jBePOvq+AMC1MEv4GGDxVXOR83riSYTw==}
 
   get-intrinsic@1.2.7:
     resolution: {integrity: sha512-VW6Pxhsrk0KAOqs3WEd0klDiF/+V7gQOpAvY1jVU/LHmaD/kQO4523aiJuikX/QAKYiW6x8Jh+RJej1almdtCA==}
@@ -5427,9 +5450,20 @@ snapshots:
     dependencies:
       cytoscape: 3.31.0
 
+  cytoscape-node-edge-html-label@1.0.6(@types/cytoscape@3.21.9)(cytoscape@3.31.0):
+    dependencies:
+      cytoscape: 3.31.0
+    optionalDependencies:
+      '@types/cytoscape': 3.21.9
+
   cytoscape-popper@4.0.1(cytoscape@3.31.0):
     dependencies:
       cytoscape: 3.31.0
+
+  cytoscape-view-utilities@6.0.0(cytoscape@3.31.0):
+    dependencies:
+      cytoscape: 3.31.0
+      geometric: 2.5.5
 
   cytoscape@3.31.0: {}
 
@@ -6035,6 +6069,8 @@ snapshots:
       is-callable: 1.2.7
 
   functions-have-names@1.2.3: {}
+
+  geometric@2.5.5: {}
 
   get-intrinsic@1.2.7:
     dependencies:

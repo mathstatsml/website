@@ -8,14 +8,6 @@ import {
 } from "cytoscape";
 import { z } from "zod";
 
-declare module "cytoscape-popper" {
-  interface PopperInstance {
-    show(): void;
-    hide(): void;
-    destroy(): void;
-  }
-}
-
 export const TopicNodeDataSchema = z
   .object({
     id: z.string(),
@@ -58,6 +50,8 @@ export const BountyVideoNodeDataSchema = z
 
 export const PrerequisiteEdgeDataSchema = z
   .object({
+    target: z.string(),
+    source: z.string(),
     type: z.enum(["main", "supporting", "invisible"]),
     importance: z.union([z.literal(1), z.literal(2), z.literal(3)]),
     message: z.string(),
@@ -108,3 +102,5 @@ export type PrerequisiteEdgeDefinition = z.infer<
   EdgeDefinition;
 
 export type ElementDefinition = z.infer<typeof ElementSchema>;
+
+export type ElementDefinitionList = ElementDefinition[];

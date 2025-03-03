@@ -4,8 +4,12 @@ import { VideoCard } from "~/components/ui/video-card";
 import {
   type ElementDefinition,
   type VideoNodeDataDefinition,
-} from "~/types/cytoscape";
-import cytoscape, { type Core, type NodeSingular } from "cytoscape";
+} from "~/types/cytoscape-elements";
+import cytoscape, {
+  type Core,
+  type NodeSingular,
+  type Stylesheet,
+} from "cytoscape";
 import dagre, { type DagreLayoutOptions } from "cytoscape-dagre";
 import navigator from "cytoscape-navigator";
 import cytoscapePopper, {
@@ -15,9 +19,12 @@ import cytoscapePopper, {
 import { useEffect, useRef, useState } from "react";
 import CytoscapeComponent from "react-cytoscapejs";
 import { createRoot } from "react-dom/client";
-import tippy, { sticky } from "tippy.js";
+import tippy, { hideAll, sticky } from "tippy.js";
 import "cytoscape-navigator/cytoscape.js-navigator.css";
 import "tippy.js/animations/scale-subtle.css";
+import viewUtilities from "cytoscape-view-utilities";
+
+const nodeEdgeHtmlLabel = require("cytoscape-node-edge-html-label");
 
 export const Cytoscape = ({ elements }: { elements: ElementDefinition[] }) => {
   const tippyFactory: PopperFactory = (ref, content) => {
@@ -50,6 +57,22 @@ export const Cytoscape = ({ elements }: { elements: ElementDefinition[] }) => {
     nodeDimensionsIncludeLabels: true,
   };
 
+  const stylesheet: Stylesheet[] = [
+    {
+      selector: "node",
+      style: {
+        label: "data(label)",
+      },
+    },
+    {
+      selector: "edge",
+      style: {
+        "target-arrow-shape": "triangle",
+        "curve-style": "bezier",
+      },
+    },
+  ];
+
   const cyRef = useRef<Core | null>(null);
   const [currentTip, setCurrentTip] = useState<PopperInstance | null>(null);
 
@@ -80,19 +103,20 @@ export const Cytoscape = ({ elements }: { elements: ElementDefinition[] }) => {
         tip.show();
         setCurrentTip(tip);
       });
+      cy.on("tap", closeTippy);
 
-      cy.on("tap", (event) => {
-        const element = event.target as Core;
-        if (element === cy) {
-          closeTippy();
-        }
-      });
-
-      cy.on("zoom pan", closeTippy);
-
-      cy.on("tap", "[nodeType = 'topic']", closeTippy);
+      // cy.on("mouseover", "[nodeType = 'video']", (event) => {
+      //   const node = event.target as NodeSingular;
+      //   const incomingElements = node.incomers();
+      //   incomingElements.style({
+      //     "background-color": "#ff0000",
+      //     "line-color": "#ff0000",
+      //     "target-arrow-color": "#ff0000",
+      //   });
+      // });
 
       return () => {
+        hideAll();
         nav.destroy();
         cy.removeAllListeners();
       };
@@ -111,6 +135,7 @@ export const Cytoscape = ({ elements }: { elements: ElementDefinition[] }) => {
       maxZoom={1e1}
       boxSelectionEnabled={false}
       autoungrabify={true}
+      stylesheet={stylesheet}
     />
   );
 };
