@@ -8,8 +8,11 @@ import {
 import cytoscape, { type Core, type NodeSingular } from "cytoscape";
 import dagre, { type DagreLayoutOptions } from "cytoscape-dagre";
 import navigator from "cytoscape-navigator";
-import cytoscapePopper, { type PopperFactory } from "cytoscape-popper";
-import { useEffect, useRef } from "react";
+import cytoscapePopper, {
+  type PopperFactory,
+  type PopperInstance,
+} from "cytoscape-popper";
+import { useEffect, useRef, useState } from "react";
 import CytoscapeComponent from "react-cytoscapejs";
 import { createRoot } from "react-dom/client";
 import tippy, { sticky } from "tippy.js";
@@ -41,14 +44,29 @@ export const Cytoscape = ({ elements }: { elements: ElementDefinition[] }) => {
   cytoscape.use(cytoscapePopper(tippyFactory));
   cytoscape.use(navigator);
 
+  const layout: DagreLayoutOptions = {
+    name: "dagre",
+    rankDir: "LR",
+    nodeDimensionsIncludeLabels: true,
+  };
+
   const cyRef = useRef<Core | null>(null);
+  const [currentTip, setCurrentTip] = useState<PopperInstance | null>(null);
 
   useEffect(() => {
     if (cyRef.current) {
       const cy = cyRef.current;
       const nav = cy.navigator();
 
+      const closeTippy = () => {
+        if (currentTip) {
+          currentTip.hide();
+          setCurrentTip(null);
+        }
+      };
+
       cy.on("tap", "[nodeType = 'video']", (event) => {
+        closeTippy();
         const node = event.target as NodeSingular;
         const videoData = node.data() as VideoNodeDataDefinition;
         const tip = node.popper({
@@ -60,20 +78,26 @@ export const Cytoscape = ({ elements }: { elements: ElementDefinition[] }) => {
           },
         });
         tip.show();
+        setCurrentTip(tip);
       });
+
+      cy.on("tap", (event) => {
+        const element = event.target as Core;
+        if (element === cy) {
+          closeTippy();
+        }
+      });
+
+      cy.on("zoom pan", closeTippy);
+
+      cy.on("tap", "[nodeType = 'topic']", closeTippy);
 
       return () => {
         nav.destroy();
         cy.removeAllListeners();
       };
     }
-  }, []);
-
-  const layout: DagreLayoutOptions = {
-    name: "dagre",
-    rankDir: "LR",
-    nodeDimensionsIncludeLabels: true,
-  };
+  }, [currentTip]);
 
   return (
     <CytoscapeComponent
@@ -83,6 +107,10 @@ export const Cytoscape = ({ elements }: { elements: ElementDefinition[] }) => {
       elements={elements}
       layout={layout}
       className="size-full"
+      minZoom={1e-1}
+      maxZoom={1e1}
+      boxSelectionEnabled={false}
+      autoungrabify={true}
     />
   );
 };
