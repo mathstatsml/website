@@ -21,7 +21,7 @@ export const VideoCard = ({
   parent,
   tier,
   type,
-  author,
+  authors,
   link,
   tags,
 }: VideoNodeDataDefinition) => {
@@ -32,7 +32,7 @@ export const VideoCard = ({
   };
 
   return (
-    <Tabs defaultValue="video" className="w-full">
+    <Tabs defaultValue="video" className="w-[600px]">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="video">Video</TabsTrigger>
         <TabsTrigger value="discussion">Discussion</TabsTrigger>
@@ -53,7 +53,7 @@ export const VideoCard = ({
             ></iframe>
           </CardContent>
           <CardFooter>
-            <button>Save changes</button>
+            <button>Mark as complete</button>
           </CardFooter>
         </Card>
       </TabsContent>

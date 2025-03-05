@@ -8,7 +8,7 @@ import {
 import cytoscape, {
   type Core,
   type NodeSingular,
-  type Stylesheet,
+  type StylesheetStyle,
 } from "cytoscape";
 import dagre, { type DagreLayoutOptions } from "cytoscape-dagre";
 import navigator from "cytoscape-navigator";
@@ -33,11 +33,12 @@ export const Cytoscape = ({ elements }: { elements: ElementDefinition[] }) => {
       getReferenceClientRect: ref.getBoundingClientRect,
       trigger: "manual",
       content: content,
-      placement: "auto",
+      placement: "right",
       hideOnClick: false,
       sticky: "reference",
       arrow: roundArrow,
       interactive: true,
+      maxWidth: 600,
       appendTo: () => document.body,
       animation: "scale-subtle",
       plugins: [sticky],
@@ -56,7 +57,7 @@ export const Cytoscape = ({ elements }: { elements: ElementDefinition[] }) => {
     nodeDimensionsIncludeLabels: true,
   };
 
-  const stylesheet: Stylesheet[] = [
+  const stylesheet: StylesheetStyle[] = [
     {
       selector: "node",
       style: {
@@ -132,6 +133,7 @@ export const Cytoscape = ({ elements }: { elements: ElementDefinition[] }) => {
       className="size-full"
       minZoom={1e-1}
       maxZoom={1e1}
+      wheelSensitivity={0.1}
       boxSelectionEnabled={false}
       autoungrabify={true}
       stylesheet={stylesheet}

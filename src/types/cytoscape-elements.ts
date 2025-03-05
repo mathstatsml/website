@@ -35,7 +35,7 @@ export const VideoNodeDataSchema = z
       "research",
       "3blue1brown",
     ]),
-    author: z.array(z.enum(["AInokoji", "uzuki", "saki", "kokomi"])),
+    authors: z.array(z.enum(["AInokoji", "3blue1brown", "saki", "kokomi"])),
     link: z.string().url(),
     tags: z.array(z.string()),
   })
