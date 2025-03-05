@@ -16,15 +16,14 @@ import cytoscapePopper, {
   type PopperFactory,
   type PopperInstance,
 } from "cytoscape-popper";
+import viewUtilities from "cytoscape-view-utilities";
 import { useEffect, useRef, useState } from "react";
 import CytoscapeComponent from "react-cytoscapejs";
 import { createRoot } from "react-dom/client";
-import tippy, { hideAll, sticky } from "tippy.js";
+import tippy, { hideAll, roundArrow, sticky } from "tippy.js";
 import "cytoscape-navigator/cytoscape.js-navigator.css";
 import "tippy.js/animations/scale-subtle.css";
-import viewUtilities from "cytoscape-view-utilities";
-
-const nodeEdgeHtmlLabel = require("cytoscape-node-edge-html-label");
+import "tippy.js/dist/svg-arrow.css";
 
 export const Cytoscape = ({ elements }: { elements: ElementDefinition[] }) => {
   const tippyFactory: PopperFactory = (ref, content) => {
@@ -34,10 +33,10 @@ export const Cytoscape = ({ elements }: { elements: ElementDefinition[] }) => {
       getReferenceClientRect: ref.getBoundingClientRect,
       trigger: "manual",
       content: content,
-      arrow: true,
-      placement: "right",
+      placement: "auto",
       hideOnClick: false,
       sticky: "reference",
+      arrow: roundArrow,
       interactive: true,
       appendTo: () => document.body,
       animation: "scale-subtle",
