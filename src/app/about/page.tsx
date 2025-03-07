@@ -40,7 +40,7 @@ const About = async () => {
       <Layout>
         <Hero />
         <section className="py-[1000px]">
-          Incredible roadmap, saving you hella time
+          Incredible roadmap, saving you time
         </section>
         <section className="py-[1000px]">
           Showcase video highlighting the type of shorts we make
